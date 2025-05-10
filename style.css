@@ -1,15 +1,45 @@
+:root {
+  --color-fondo: #121212;
+  --color-texto: #ffffff;
+  --color-titulo-gradiente-inicio: #00f0ff;
+  --color-titulo-gradiente-fin: #7b00ff;
+  --color-primario: #00B2FF;
+  --color-secundario: #00f0ff;
+  --color-gris-claro: #D4D4D4;
+  --color-gris-ceniza: #2E2E2E;
+  --color-eventos: #1e1e1e;
+  --color-barra: #00D38E;
+  --color-notificacion: #2E2E2E;
+  --color-scroll-track: #1a1a1a;
+  --color-scroll-thumb-inicio: #00f0ff;
+  --color-scroll-thumb-fin: #00B2FF;
+  --color-familiar-borde: #333;
+  --color-familiar-hover: rgba(0, 178, 255, 0.25);
+  --color-btn-saludar: #00c853;
+  --color-btn-discutir: #d50000;
+  --color-btn-regalar: #ff6d00;
+  --fondo: #0a0a1e;
+  --borde: #0ff;
+  --texto: #ffffff;
+  --sombra: 0 0 10px #0ff;
+  --fuente: 'Orbitron', sans-serif;
+  --fondo-transparente: rgba(10, 10, 30, 0.8);
+}
+
 /* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primario) var(--color-scroll-track);
 }
 
 /* Fuente y fondo general */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #121212; /* Negro carbón */
-  color: #ffffff; /* Blanco puro */
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -32,33 +62,65 @@ body {
 }
 
 /* Títulos */
+h1, h2 {
+  background: linear-gradient(90deg, var(--color-titulo-gradiente-inicio), var(--color-titulo-gradiente-fin));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
 h1 {
   font-size: 3rem;
-  color: #00B2FF; /* Azul petróleo */
   margin-bottom: 40px;
 }
 
 h2 {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #D4D4D4; /* Gris claro suave */
 }
 
 /* Botones */
 button {
-  background-color: #00B2FF; /* Azul petróleo */
+  background: linear-gradient(135deg, var(--color-primario), var(--color-secundario));
   border: none;
-  color: #fff;
-  font-size: 1rem;
-  padding: 12px 20px;
+  color: var(--color-texto);
+  font-size: 1.1rem;
+  padding: 14px 24px;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(0, 178, 255, 0.4), 0 0 20px rgba(0, 240, 255, 0.2);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  transform: skewX(-20deg);
+  transition: 0.5s;
+  opacity: 0.2;
+}
+
+button:hover::before {
+  left: 100%;
+  opacity: 0.5;
 }
 
 button:hover {
-  background-color: #0090D0; /* Azul petróleo más oscuro */
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.6), 0 0 30px rgba(0, 178, 255, 0.4);
+}
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.5);
 }
 
 /* Formularios */
@@ -75,8 +137,8 @@ form input, form select {
   border-radius: 6px;
   margin-top: 5px;
   font-size: 1rem;
-  background-color: #2E2E2E; /* Gris ceniza */
-  color: #ffffff;
+  background-color: var(--color-gris-ceniza);
+  color: var(--color-texto);
 }
 
 /* Atributos estilo BitLife */
@@ -89,26 +151,21 @@ progress {
   height: 20px;
   border-radius: 8px;
   overflow: hidden;
-}
-
-progress::-webkit-progress-bar {
-  background-color: #2E2E2E; /* Gris ceniza */
-  border-radius: 8px;
+  background-color: var(--color-gris-ceniza);
 }
 
 progress::-webkit-progress-value {
-  background-color: #00D38E; /* Verde suave moderno */
-  border-radius: 8px;
+  background-color: var(--color-barra);
 }
 
 /* Eventos */
 #eventos {
   margin-top: 30px;
   width: 100%;
-  background-color: #1e1e1e;
+  background-color: var(--color-eventos);
   padding: 15px;
   border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 178, 255, 0.3); /* sombra azul petróleo */
+  box-shadow: 0 0 10px rgba(0, 178, 255, 0.3);
 }
 
 #eventos ul {
@@ -134,16 +191,12 @@ progress::-webkit-progress-value {
   }
 }
 
-.oculto {
-  display: none;
-}
-
 .notificacion {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #2E2E2E; /* Gris ceniza */
-  color: #ffffff;
+  background-color: var(--color-notificacion);
+  color: var(--color-texto);
   padding: 12px 20px;
   border-radius: 10px;
   opacity: 0;
@@ -155,6 +208,7 @@ progress::-webkit-progress-value {
   opacity: 1;
 }
 
+/* Fondo partículas animadas */
 #fondo-particulas {
   position: fixed;
   top: 0; left: 0;
@@ -176,8 +230,8 @@ progress::-webkit-progress-value {
   top: 0; left: 0;
   width: 100%;
   height: 100%;
-  background-color: #121212;
-  color: #00B2FF;
+  background-color: var(--color-fondo);
+  color: var(--color-primario);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,42 +260,29 @@ progress::-webkit-progress-value {
   }
 }
 
-h1, h2 {
-  background: linear-gradient(90deg, #00f0ff, #7b00ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Scrollbar personalizada para WebKit (Chrome, Edge, Safari) */
+/* Scroll personalizada WebKit */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: var(--color-scroll-track);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00f0ff, #00B2FF);
+  background: linear-gradient(180deg, var(--color-scroll-thumb-inicio), var(--color-scroll-thumb-fin));
   border-radius: 10px;
-  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #00B2FF, #00f0ff);
+  background: linear-gradient(180deg, var(--color-scroll-thumb-fin), var(--color-scroll-thumb-inicio));
 }
 
-/* Firefox (más limitado pero útil) */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #00B2FF #1a1a1a;
-}
-
+/* Familiares */
 .familiar {
-  background-color: #1e1e1e;
-  border: 1px solid #333;
+  background-color: var(--color-eventos);
+  border: 1px solid var(--color-familiar-borde);
   border-radius: 12px;
   padding: 15px;
   margin-bottom: 20px;
@@ -252,59 +293,10 @@ h1, h2 {
 
 .familiar:hover {
   transform: scale(1.02);
-  box-shadow: 0 6px 20px rgba(0, 178, 255, 0.25);
+  box-shadow: 0 6px 20px var(--color-familiar-hover);
 }
 
 .familiar button {
-  margin: 5px 5px 0 0;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.familiar button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
-}
-
-/* Estilos específicos por acción */
-.btn-saludar {
-  background-color: #00c853;
-  color: white;
-}
-
-.btn-discutir {
-  background-color: #d50000;
-  color: white;
-}
-
-.btn-regalar {
-  background-color: #ff6d00;
-  color: white;
-}
-
-.familiar .info-relacion {
-  position: relative;
-  z-index: 1;
-  margin-bottom: 12px;
-  font-size: 1.1rem;
-}
-
-.familiar progress {
-  z-index: 1;
-  position: relative;
-  margin-bottom: 10px;
-  height: 18px;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #2E2E2E;
-}
-
-.familiar button {
-  z-index: 1;
   margin: 8px 6px 0 0;
   padding: 10px 16px;
   font-size: 0.9rem;
@@ -320,12 +312,71 @@ h1, h2 {
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
-progress::-webkit-progress-value {
-  background-color: var(--color-barra, #00D38E); /* valor por defecto */
-  border-radius: 8px;
+.btn-saludar {
+  background-color: var(--color-btn-saludar);
+  color: white;
 }
 
-progress::-moz-progress-bar {
-  background-color: var(--color-barra, #00D38E);
+.btn-discutir {
+  background-color: var(--color-btn-discutir);
+  color: white;
+}
+
+.btn-regalar {
+  background-color: var(--color-btn-regalar);
+  color: white;
+}
+
+.familia-container {
+  background-color: var(--fondo-transparente);
+  border: 2px solid var(--borde);
+  padding: 1rem;
+  margin-top: 1rem;
   border-radius: 8px;
+  color: var(--texto);
+  font-family: var(--fuente);
+  box-shadow: var(--sombra);
+}
+
+.familia-container h3 {
+  border-bottom: 1px solid var(--borde);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--borde);
+}
+
+.familia-container p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* Mostrar/Ocultar */
+.oculto {
+  display: none;
+}
+
+.visible {
+  display: block;
+  animation: aparecer 0.3s ease-out;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Secciones del juego */
+.container {
+  border: 2px solid var(--borde);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: var(--sombra);
+  background-color: var(--fondo-transparente);
 }

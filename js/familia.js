@@ -39,44 +39,60 @@ function generarFamilia() {
 }
 
 function mostrarFamilia(familia) {
-  const contenedor = document.getElementById("relaciones");
-  contenedor.innerHTML = ""; // Limpiar
+  const lista = document.getElementById("lista-familia");
+  if (!lista) return; // Evitar error si no existe
 
-  familia.forEach(f => {
-    if (!f.vivo) return;
+  lista.innerHTML = ""; // Limpiar lista
 
-    const div = document.createElement("div");
-    div.className = "familiar";
-    div.innerHTML = `
-      <strong>${f.tipo}:</strong> ${f.nombre} (${f.edad} años) <br>
-      Relación: <progress class="atributo"  max="100" value="${f.relacion}"></progress> (${f.relacion}) <br>
-      <button class="btn-saludar">👋 Saludar</button>
-      <button class="btn-discutir">💢 Discutir</button>
-      <button class="btn-regalar">🎁 Regalar</button>
-    `;
+  familia.forEach((familiar, index) => {
+    if (!familiar.vivo) return;
 
-    // Interacciones
-    div.querySelector(".btn-saludar").addEventListener("click", () => {
-      f.relacion = Math.min(f.relacion + 5, 100);
-      agregarEvento(`Saludaste a ${f.nombre}. Tu relación mejoró.`);
-      mostrarFamilia(familia); // Actualizar UI
+    const li = document.createElement("li");
+    li.textContent = `${familiar.tipo}: ${familiar.nombre} (${familiar.edad} años)`;
+
+    li.addEventListener("click", () => {
+      mostrarAccionesFamiliar(familiar, index);
     });
 
-    div.querySelector(".btn-discutir").addEventListener("click", () => {
-      f.relacion = Math.max(f.relacion - 10, 0);
-      agregarEvento(`Tuviste una discusión con ${f.nombre}. Tu relación empeoró.`);
-      mostrarFamilia(familia);
-    });
-
-    div.querySelector(".btn-regalar").addEventListener("click", () => {
-      f.relacion = Math.min(f.relacion + 10, 100);
-      agregarEvento(`Le diste un regalo a ${f.nombre}. Tu relación mejoró.`);
-      mostrarFamilia(familia);
-    });
-
-    contenedor.appendChild(div);
+    lista.appendChild(li);
   });
-  actualizarColoresBarra();
+}
+
+function mostrarAccionesFamiliar(familiar, index) {
+  const menuAcciones = document.getElementById("acciones-familia");
+  const contenedor = document.getElementById("contenedor-acciones-familiar");
+
+  contenedor.innerHTML = `
+    <h4>${familiar.tipo}: ${familiar.nombre}</h4>
+    <p>Edad: ${familiar.edad}</p>
+    <p>Relación: <progress max="100" value="${familiar.relacion}"></progress> (${familiar.relacion})</p>
+    <button id="btn-saludar">👋 Saludar</button>
+    <button id="btn-discutir">💢 Discutir</button>
+    <button id="btn-regalar">🎁 Regalar</button>
+  `;
+
+  document.getElementById("btn-saludar").onclick = () => {
+    familiar.relacion = Math.min(familiar.relacion + 5, 100);
+    agregarEvento(`Saludaste a ${familiar.nombre}. Tu relación mejoró.`);
+    mostrarAccionesFamiliar(familiar, index); // Refrescar UI
+    mostrarFamilia(personaje.familia);
+  };
+
+  document.getElementById("btn-discutir").onclick = () => {
+    familiar.relacion = Math.max(familiar.relacion - 10, 0);
+    agregarEvento(`Tuviste una discusión con ${familiar.nombre}. Tu relación empeoró.`);
+    mostrarAccionesFamiliar(familiar, index);
+    mostrarFamilia(personaje.familia);
+  };
+
+  document.getElementById("btn-regalar").onclick = () => {
+    familiar.relacion = Math.min(familiar.relacion + 10, 100);
+    agregarEvento(`Le diste un regalo a ${familiar.nombre}. Tu relación mejoró.`);
+    mostrarAccionesFamiliar(familiar, index);
+    mostrarFamilia(personaje.familia);
+  };
+
+  menuAcciones.classList.remove("oculto");
 }
 
 function envejecerFamilia(familia) {

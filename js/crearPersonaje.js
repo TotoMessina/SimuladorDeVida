@@ -34,20 +34,17 @@ function generarPersonajeAleatorio() {
     rangoSocial,
     talento,
     edad: 0,
-    felicidad: Math.floor(Math.random() * 31) + 70,     // 70-100
-    salud: Math.floor(Math.random() * 41) + 60,         // 60-100
-    inteligencia: Math.floor(Math.random() * 41) + 60,  // 60-100
-    aspecto: Math.floor(Math.random() * 41) + 60        // 60-100
+    felicidad: Math.floor(Math.random() * 31) + 70,
+    salud: Math.floor(Math.random() * 41) + 60,
+    inteligencia: Math.floor(Math.random() * 41) + 60,
+    aspecto: Math.floor(Math.random() * 41) + 60,
+    familia: generarFamilia() // 👈 asignamos familia ANTES de guardar
   };
 
-  personajeActual = personaje; 
+  personajeActual = personaje;
 
-  // Guardamos en localStorage
+  // Guardamos en localStorage ya con familia incluida
   localStorage.setItem("personajeActual", JSON.stringify(personaje));
-
-  // Asignamos y mostramos familia después de crear el personaje
-  personaje.familia = generarFamilia(personaje);
-  mostrarFamilia(personaje.familia);
 
   return personaje;
 }

@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
               }
             });
           }
+          verificarMuerte(personajeActual);
           actualizarUI(personajeActual);
           agregarEvento(`Ahora tienes ${personajeActual.edad} años.`);
           guardarEstadoActual();

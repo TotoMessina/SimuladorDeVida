@@ -1,22 +1,30 @@
-function mostrarPersonaje(personaje) {
-  const contenedor = document.getElementById("info-personaje");
+function mostrarPersonaje(personaje, esCargado = false) {
+  const listaEventos = document.getElementById("lista-eventos");
+  if (!esCargado && listaEventos) {
+    listaEventos.innerHTML = "";
+  }
 
-  if (!personaje || !contenedor) return;
+  // Mostrar nombre, edad, etc...
+  document.getElementById("nombre-jugador").textContent = personaje.nombre;
+  document.getElementById("datos-jugador").textContent = `${personaje.edad} años, nacido en ${personaje.ciudad}, ${personaje.pais}`;
 
-  contenedor.innerHTML = `
-    <h2>${personaje.nombre}</h2>
-    <p><strong>Género:</strong> ${personaje.genero}</p>
-    <p><strong>Edad:</strong> ${personaje.edad} años</p>
-    <p><strong>País:</strong> ${personaje.pais}</p>
-    <p><strong>Ciudad:</strong> ${personaje.ciudad}</p>
-    <p><strong>Clase social:</strong> ${personaje.rangoSocial}</p>
-    <p><strong>Talento:</strong> ${personaje.talento}</p>
-    <hr>
-    <p><strong>Felicidad:</strong> ${personaje.felicidad}</p>
-    <p><strong>Salud:</strong> ${personaje.salud}</p>
-    <p><strong>Inteligencia:</strong> ${personaje.inteligencia}</p>
-    <p><strong>Aspecto:</strong> ${personaje.aspecto}</p>
-  `;
+  // Mostrar atributos
+  document.getElementById("felicidad").value = personaje.felicidad;
+  document.getElementById("salud").value = personaje.salud;
+  document.getElementById("inteligencia").value = personaje.inteligencia;
+  document.getElementById("aspecto").value = personaje.aspecto;
+
+  // Mostrar familia
+  if (personaje.familia && Array.isArray(personaje.familia)) {
+    mostrarFamilia(personaje.familia);
+  } else {
+    console.warn("El personaje no tiene familia generada.");
+  }
+
+  // Restaurar eventos si es una partida cargada
+  if (esCargado && personaje.eventos) {
+    personaje.eventos.forEach(evento => agregarEvento(evento));
+  }
 }
 
 // Si ya hay un personaje guardado, lo mostramos al cargar
@@ -44,3 +52,13 @@ function actualizarUI(personaje) {
 
   mostrarFamilia(personaje.familia);
 }
+
+function mostrarPantallaMuerte(personaje) {
+  const pantallaJuego = document.getElementById("pantalla-juego");
+  pantallaJuego.innerHTML = `
+    <h2>💀 Fin de la vida</h2>
+    <p>${personaje.nombre} ha muerto a los ${personaje.edad} años.</p>
+    <button onclick="location.reload()">Comenzar nueva vida</button>
+  `;
+}
+
