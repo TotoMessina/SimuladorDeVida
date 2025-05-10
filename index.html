@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Life is Life</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Pantalla de inicio -->
+  <section id="pantalla-inicio" class="pantalla">
+    <h1>Life is Life</h1>
+    <button id="btn-nueva-vida">¡Comienza una vida nueva aleatoria!</button>
+    <button id="btn-vida-personalizada">¡Comienza una vida personalizada!</button>
+    <button id="btn-cargar-juego">Cargar partida</button>
+  </section>
+
+  <!-- Creación de personaje -->
+  <section id="pantalla-creacion" class="pantalla oculto">
+    <h2>Vida personalizada</h2>
+    <form id="form-personaje">
+      <label>Nombre: <input type="text" id="nombre" required></label><br>
+      <label>Género:
+        <select id="genero">
+          <option value="Hombre">Hombre</option>
+          <option value="Mujer">Mujer</option>
+        </select>
+      </label><br>
+      <label>País: <input type="text" id="pais" value="España" required></label><br>
+      <label>Ciudad: <input type="text" id="ciudad" value="La Palma" required></label><br>
+      <label>Talento:
+        <select id="talento">
+          <option value="Deportes">Deportes</option>
+          <option value="Música">Música</option>
+          <option value="Actuación">Actuación</option>
+          <option value="Ciencia">Ciencia</option>
+        </select>
+      </label><br>
+      <button type="submit">¡Comenzar vida!</button>
+    </form>
+    <button id="btn-volver-inicio">Volver</button>
+  </section>
+
+  <!-- Interfaz del juego -->
+  <section id="pantalla-juego" class="pantalla oculto">
+    <div id="info-personaje">
+        <h2 id="nombre-jugador">Nombre</h2>
+        <p id="datos-jugador">Edad, lugar de nacimiento, etc.</p>
+        <button id="btn-nuevo-personaje">Nuevo personaje</button>
+        <button id="btn-avanzar-edad">+ Edad</button>
+    </div>
+
+    <div id="atributos">
+      <p>Felicidad: <progress id="felicidad" max="100" value="50"></progress></p>
+      <p>Salud: <progress id="salud" max="100" value="50"></progress></p>
+      <p>Inteligencia: <progress id="inteligencia" max="100" value="50"></progress></p>
+      <p>Aspecto: <progress id="aspecto" max="100" value="50"></progress></p>
+    </div>
+
+    <button id="btn-avanzar-edad">+ Edad</button>
+
+    <div id="eventos">
+      <h3>Eventos:</h3>
+      <ul id="lista-eventos"></ul>
+    </div>
+
+    <button id="btn-guardar">Guardar progreso</button>
+    <button id="btn-volver-inicio-juego">Volver al inicio</button>
+  
+    <div id="menu-relaciones">
+      <h3>Relaciones</h3>
+      <ul id="lista-familia"></ul>
+    </div>
+
+  </section>
+
+    <div id="notificacion" class="notificacion oculto"></div>
+
+    <script src="js/familia.js"></script>
+    <script src="js/crearPersonaje.js"></script>
+    <script src="js/uiPersonaje.js"></script>
+    <script src="js/eventos.js"></script>
+    <script src="js/controlJuego.js"></script>
+    <script src="js/navegacion.js"></script>
+
+    <script>
+    const personaje = generarPersonajeAleatorio();
+    console.log("Nuevo personaje:", personaje);
+    // Aquí podrías renderizarlo en pantalla con otro JS
+    </script>
+</body>
+</html>
