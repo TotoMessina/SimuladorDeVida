@@ -22,7 +22,17 @@ document.addEventListener("DOMContentLoaded", () => {
       boton.addEventListener("click", () => {
         if (personajeActual) {
           personajeActual.edad++;
-          envejecerFamilia(personajeActual.familia); 
+          if (personajeActual.familia) {
+            personajeActual.familia.forEach(familiar => {
+              familiar.edad++;
+
+              // Probabilidad de muerte con edad (ejemplo simple)
+              if (familiar.vivo && Math.random() < (familiar.edad - 60) * 0.01) {
+                familiar.vivo = false;
+                agregarEvento(`Tu ${familiar.tipo.toLowerCase()} ${familiar.nombre} ha fallecido a los ${familiar.edad} años.`);
+              }
+            });
+          }
           actualizarUI(personajeActual);
           agregarEvento(`Ahora tienes ${personajeActual.edad} años.`);
           guardarEstadoActual();
@@ -50,4 +60,23 @@ function guardarEstadoActual() {
   if (personajeActual) {
     localStorage.setItem("personajeActual", JSON.stringify(personajeActual));
   }
+}
+
+function actualizarColoresBarra() {
+  const barras = document.querySelectorAll('progress.atributo');
+  barras.forEach(barra => {
+    const valor = barra.value / barra.max;
+
+    let color = '#00D38E'; // verde por defecto
+
+    if (valor < 0.3) {
+      color = '#d50000'; // rojo
+    } else if (valor < 0.6) {
+      color = '#ff6d00'; // naranja
+    } else if (valor < 0.8) {
+      color = '#ffd600'; // amarillo
+    }
+
+    barra.style.setProperty('--color-barra', color);
+  });
 }

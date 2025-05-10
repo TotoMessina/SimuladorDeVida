@@ -28,5 +28,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function actualizarUI(personaje) {
-  mostrarPersonaje(personaje);
+  const nombre = document.getElementById("nombre-jugador");
+  const datos = document.getElementById("datos-jugador");
+  const felicidad = document.getElementById("felicidad");
+  const salud = document.getElementById("salud");
+  const inteligencia = document.getElementById("inteligencia");
+  const aspecto = document.getElementById("aspecto");
+
+  if (nombre) nombre.textContent = personaje.nombre;
+  if (datos) datos.textContent = `Edad: ${personaje.edad} años — Nacido en ${personaje.ciudad}, ${personaje.pais}`;
+  if (felicidad) felicidad.value = personaje.felicidad;
+  if (salud) salud.value = personaje.salud;
+  if (inteligencia) inteligencia.value = personaje.inteligencia;
+  if (aspecto) aspecto.value = personaje.aspecto;
+
+  mostrarFamilia(personaje.familia);
 }

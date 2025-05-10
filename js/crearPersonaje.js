@@ -46,7 +46,7 @@ function generarPersonajeAleatorio() {
   localStorage.setItem("personajeActual", JSON.stringify(personaje));
 
   // Asignamos y mostramos familia después de crear el personaje
-  personaje.familia = generarFamilia();
+  personaje.familia = generarFamilia(personaje);
   mostrarFamilia(personaje.familia);
 
   return personaje;

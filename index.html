@@ -10,16 +10,16 @@
 
   <!-- Pantalla de inicio -->
   <section id="pantalla-inicio" class="pantalla">
-    <h1>Life is Life</h1>
-    <button id="btn-nueva-vida">¡Comienza una vida nueva aleatoria!</button>
-    <button id="btn-vida-personalizada">¡Comienza una vida personalizada!</button>
-    <button id="btn-cargar-juego">Cargar partida</button>
+    <h1 class="fade-in">Life is Life</h1>
+    <button class="fade-in" id="btn-nueva-vida">¡Comienza una vida nueva aleatoria!</button>
+    <button class="fade-in" id="btn-vida-personalizada">¡Comienza una vida personalizada!</button>
+    <button class="fade-in" id="btn-cargar-juego">Cargar partida</button>
   </section>
 
   <!-- Creación de personaje -->
   <section id="pantalla-creacion" class="pantalla oculto">
     <h2>Vida personalizada</h2>
-    <form id="form-personaje">
+    <form id="form-personaje" class="fade-in">
       <label>Nombre: <input type="text" id="nombre" required></label><br>
       <label>Género:
         <select id="genero">
@@ -43,37 +43,36 @@
   </section>
 
   <!-- Interfaz del juego -->
-  <section id="pantalla-juego" class="pantalla oculto">
+  <section id="pantalla-juego" class="pantalla oculto" class="fade-in">
     <div id="info-personaje">
         <h2 id="nombre-jugador">Nombre</h2>
         <p id="datos-jugador">Edad, lugar de nacimiento, etc.</p>
         <button id="btn-nuevo-personaje">Nuevo personaje</button>
-        <button id="btn-avanzar-edad">+ Edad</button>
     </div>
 
-    <div id="atributos">
+    <div id="atributos" class="fade-in">
       <p>Felicidad: <progress id="felicidad" max="100" value="50"></progress></p>
       <p>Salud: <progress id="salud" max="100" value="50"></progress></p>
       <p>Inteligencia: <progress id="inteligencia" max="100" value="50"></progress></p>
       <p>Aspecto: <progress id="aspecto" max="100" value="50"></progress></p>
     </div>
 
-    <button id="btn-avanzar-edad">+ Edad</button>
+    <button id="btn-avanzar-edad" class="fade-in">+ Edad</button>
 
-    <div id="eventos">
+    <div id="eventos" class="fade-in">
       <h3>Eventos:</h3>
       <ul id="lista-eventos"></ul>
     </div>
 
-    <button id="btn-guardar">Guardar progreso</button>
-    <button id="btn-volver-inicio-juego">Volver al inicio</button>
+    <button id="btn-guardar" class="fade-in">Guardar progreso</button>
+    <button id="btn-volver-inicio-juego" class="fade-in">Volver al inicio</button>
   
-    <div id="menu-relaciones">
-      <h3>Relaciones</h3>
-      <ul id="lista-familia"></ul>
+    <div id="relaciones" class="fade-in">
+      <h3>Familia:</h3>
     </div>
 
   </section>
+    <div id="fondo-particulas"></div>
 
     <div id="notificacion" class="notificacion oculto"></div>
 
